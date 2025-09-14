@@ -5,9 +5,7 @@ let errorDisplay = document.getElementById("error-display");
 
 // Add Enter key listener (fix Level 1 Bug 1)
 document.getElementById("city-input").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        getWeather();
-    }
+ 
 });
 
 function getWeather() {
