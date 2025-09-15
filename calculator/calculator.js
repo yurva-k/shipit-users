@@ -204,7 +204,6 @@ function memoryAdd() {
     // Bug: No check for memory overflow (very large numbers)
     // Should limit memory to reasonable bounds
 }
-
 // Initialize calculator on page load
 // Initialize calculator on page load + keyboard support
 window.onload = function () {
