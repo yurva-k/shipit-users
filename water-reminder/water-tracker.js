@@ -64,8 +64,19 @@ function updateProgress() {
 
     const percentage = Math.min((currentIntake / dailyGoal) * 100, 100);
 
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = `${percentage}%`;
+
+    // Change color if goal is reached/exceeded
+    if (currentIntake >= dailyGoal) {
+        progressBar.classList.remove("bg-blue-500");
+        progressBar.classList.add("bg-green-500");
+    } else {
+        progressBar.classList.remove("bg-green-500");
+        progressBar.classList.add("bg-blue-500");
+    }
+
     document.getElementById('progress-text').textContent = `${currentIntake} / ${dailyGoal} ml`;
-    document.getElementById('progress-bar').style.width = `${percentage}%`;
     document.getElementById('percentage-display').textContent = `${Math.round(percentage)}%`;
 }
 
@@ -123,9 +134,14 @@ function stopReminder() {
 // ---------------------- Goal Check ----------------------
 function checkGoalAchievement() {
     if (currentIntake >= dailyGoal) {
-        showNotification('🎉 Congratulations! You reached your daily goal!', 'success');
+        if (currentIntake === dailyGoal) {
+            showNotification('🎉 Congratulations! You reached your daily goal!', 'success');
+        } else {
+            showNotification(`🥳 Amazing! You exceeded your goal by ${currentIntake - dailyGoal} ml!`, 'success');
+        }
     }
 }
+
 
 // ---------------------- Reset ----------------------
 function resetDaily() {
