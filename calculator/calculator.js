@@ -206,6 +206,30 @@ function memoryAdd() {
 }
 
 // Initialize calculator on page load
-window.onload = function() {
-    display.value = '0'; // This should fix Level 1 Bug 1 if added
+// Initialize calculator on page load + keyboard support
+window.onload = function () {
+  display.value = "0"; // Fix: display should start at 0
+
+  // Keyboard support
+  document.addEventListener("keydown", function (event) {
+    if (!isNaN(event.key)) {
+      // Number keys
+      appendToDisplay(event.key);
+    } else if (["+", "-", "*", "/"].includes(event.key)) {
+      // Operators
+      appendToDisplay(event.key);
+    } else if (event.key === "Enter" || event.key === "=") {
+      // Calculate on Enter or =
+      event.preventDefault();
+      calculate();
+    } else if (event.key === "Backspace") {
+      // Delete last digit
+      deleteLast();
+    } else if (event.key === "Escape") {
+      // Clear all
+      clearDisplay();
+    } else if (event.key === ".") {
+      appendToDisplay(".");
+    }
+  });
 };
